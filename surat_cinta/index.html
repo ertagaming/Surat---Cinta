@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surat Cinta Untukmu</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffe6e6, #ffccff);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 100;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    }
+
+    .logo-text {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #d63384;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+      animation: fadeIn 1.5s ease-in-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 1rem;
+    }
+
+    .from {
+      text-align: right;
+      font-style: italic;
+      margin-top: 2rem;
+    }
+
+    audio {
+      display: block;
+      margin: 1rem auto;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 2s linear forwards;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    .reply-btn {
+      display: block;
+      margin: 2rem auto 1rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .reply-btn:hover {
+      background-color: #e0558f;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      to {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .popup {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      animation: popUp 0.4s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .popup textarea {
+      width: 100%;
+      border-radius: 10px;
+      padding: 0.7rem;
+      margin-top: 1rem;
+      resize: vertical;
+      border: 1px solid #ccc;
+    }
+
+    .popup button {
+      margin-top: 1rem;
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .popup button:hover {
+      background-color: #e0558f;
+    }
+
+    #waButton {
+      background-color: #25D366 !important;
+      margin-left: 0.5rem;
+    }
+
+    @keyframes popUp {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .logo {
+        width: 32px;
+        height: 32px;
+      }
+
+      .logo-text {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body onclick="spawnHeart(event)">
+  <header class="site-header">
+    <img src="407bf155-441c-4e9b-9896-58a460f86b54.png" alt="Logo" class="logo" />
+    <span class="logo-text">Untuk Kamu 💖</span>
+  </header>
+
+  <div class="card">
+    <h1>Untuk Kamu yang Selalu Ada di Hatiku 💖</h1>
+    <p>
+  Di antara banyak senyuman yang pernah aku lihat, senyumanmu adalah yang paling lama tinggal di pikiranku. Kamu punya cara unik buat bikin hari-hariku jadi lebih hangat, lebih hidup.
+</p>
+<p>
+  Mungkin aku bukan pujangga, tapi tiap kali kamu hadir, rasanya hatiku menulis puisi sendiri. Dan setiap baitnya selalu tentang kamu — tentang harapan, rasa nyaman, dan keinginan untuk terus dekat.
+</p>
+<p>
+  Jadi... kalau kamu izinkan, aku pengin jadi seseorang yang nemenin kamu — nggak cuma di tawa, tapi juga di tenang dan sepi. Boleh nggak aku jadi bagian dari hidup kamu?
+</p>
+<p class="from">
+  Dari seseorang yang tulus menatap kamu,<br />
+  Exaudi Banjarnahor
+</p>
+
+
+    <audio controls autoplay loop>
+      <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3" />
+      Browser kamu tidak mendukung audio.
+    </audio>
+
+    <button class="reply-btn" onclick="toggleForm()">Jawab Aku 💌</button>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
+    <div class="popup" onclick="event.stopPropagation()">
+      <h2>Jawabanmu 💬</h2>
+      <textarea rows="4" id="popupReply" placeholder="Tulis di sini ya..."></textarea>
+      <div style="display:flex; justify-content:center; gap:0.5rem;">
+        <button onclick="submitPopup()">Kirim</button>
+        <button id="waButton" onclick="kirimWhatsApp()" style="display:none;">Kirim ke WhatsApp 📤</button>
+      </div>
+      <p id="popupThanks" style="display:none; color: #28a745; margin-top: 1rem;">
+        Makasih ya udah jawab! 💚
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function spawnHeart(e) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${e.clientX - 10}px`;
+      heart.style.top = `${e.clientY - 10}px`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    }
+
+    function toggleForm() {
+      document.getElementById('popupOverlay').style.display = 'flex';
+    }
+
+    function closePopup(e) {
+      if (e.target.id === 'popupOverlay') {
+        document.getElementById('popupOverlay').style.display = 'none';
+        document.getElementById('popupReply').value = '';
+        document.getElementById('popupThanks').style.display = 'none';
+        document.getElementById('waButton').style.display = 'none';
+      }
+    }
+
+    function submitPopup() {
+      const input = document.getElementById('popupReply').value.trim();
+      if (input) {
+        document.getElementById('popupThanks').style.display = 'block';
+        document.getElementById('waButton').style.display = 'inline-block';
+        localStorage.setItem("jawabanSurat", input);
+      } else {
+        alert("Isi dulu yaa 😅");
+      }
+    }
+
+    function kirimWhatsApp() {
+      const jawaban = localStorage.getItem("jawabanSurat");
+      const nomor = "081275629706"; // 🔁 Ganti dengan nomor kamu
+      if (jawaban) {
+        const pesan = encodeURIComponent("Hai! Ini jawabanku buat kamu 💌:\n\n" + jawaban);
+        window.open(`https://wa.me/${nomor}?text=${pesan}`, "_blank");
+      } else {
+        alert("Belum ada jawaban untuk dikirim 😥");
+      }
+    }
+  </script>
+</body>
+</html>
